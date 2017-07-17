@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>color guessing game</title>
+
+    </head>
+    <body onload="do_game()">
+        <script>
+        function col()
+        {myBody=document.getElementsByTagName("body")[0];
+        myBody.style.background = target;
+        }
+        var target_index;
+        var target;
+        var guess_input_text;
+        var finished = false;
+        var guesses = 0;
+        var colors = ["aqua","brown","cyan","darkblue","grey","lightblue","maroon","navy", "orange", "red"];
+        function do_game()
+        {
+            var random_number = Math.random () * (colors.length);
+            var random_number_integer = Math.floor (random_number);
+            target_index = random_number_integer;
+            target = colors[target_index];
+            alert(target);
+            while (!finished)
+            {
+                guess_input_text = prompt("I am thinking of one of these colors:\n\n" + colors.join(", ") +"\n\n What color am i thinking of?");
+                guesses+=1;
+
+                finished = check_guesses();
+            }
+        }
+        function check_guesses()
+        {
+
+            if (!colors.includes(guess_input_text))
+            {
+                alert("Sorry, I don’t recognize your color.\n\n Please try again");
+                return false;
+            }
+            if (guess_input_text > target)
+            {
+                alert("Sorry, your guess is not correct!\n\nHint: your color is alphabetically higher than mine.\n\nPlease try again.");
+                return false;
+            }
+            if (guess_input_text < target)
+            {
+                alert("Sorry, your guess is not correct!\n\nHint: your color is alphabetically lower than mine.\n\nPlease try again.");
+                return false;
+            }
+            else
+             {
+                 myBody=document.getElementsByTagName("body")[0];
+                 myBody.style.background = target;
+                 setTimeout(function()
+                 {
+                     alert("Congratulations! You have guessed the color!\n\nIt took you "+guesses+" guesses to finish the game!\n\nYou can see the colour in the background.");
+                 },10)
+
+                return true;
+            }
+
+        }
+        </script>
+
+    </body>
+</html>
